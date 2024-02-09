@@ -1,35 +1,19 @@
-import css from './app.module.css';
-import Phonebook from './Phonebook/Phonebook';
-import Contacts from './Contacts/Contacts';
-import Filter from './Filter/Filter';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getContactsThunk } from 'store/contacts/contactThunk';
-import Loader from './Loader/Loader';
-import { contactsSelector } from 'store/contacts/contactsSelectors';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './Layout/Layout';
+import Login from '../Pages/Login/Login';
+import MainPart from '../Pages/MainPart/MainPart';
+import StartPage from 'Pages/StartPage/StartPage';
+import Registration from 'Pages/Registration/Registration';
 
 export const App = () => {
-  const { contacts, error, isLoading } = useSelector(contactsSelector);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getContactsThunk());
-  }, [dispatch]);
-
   return (
-    <div className={css.wrapper}>
-      <h1 className={css.title}>Phonebook</h1>
-      <Phonebook />
-      {isLoading && <Loader />}
-      {contacts.length > 0 && (
-        <>
-          <h2 className={css.title}>Contacts</h2>
-          <Filter />
-
-          <Contacts />
-        </>
-      )}
-      {error && <div>{error}</div>}
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="/home" element={<StartPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="contacts" element={<MainPart />} />
+      </Route>
+    </Routes>
   );
 };
