@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import css from './registration.module.css';
+import { signUp } from 'services/auth-service';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [info, setInfo] = useState({ name: '', login: '', password: '' });
-  const { name, login, password } = info;
+  const navigate = useNavigate();
+  const [info, setInfo] = useState({ name: '', email: '', password: '' });
+  const { name, email, password } = info;
 
   const handleChange = ({ target }) => {
     setInfo({
@@ -12,18 +15,26 @@ function Login() {
     });
   };
 
-  const logIn = e => {
+  const submit = e => {
     e.preventDefault();
 
+    console.log(info);
+    
+    signUp(info)
+      .then(() => {
+        console.log('created');
+        navigate('/login');
+      })
+      .catch(e => console.log(e));
     setInfo({
       name: '',
-      login: '',
+      email: '',
       password: '',
     });
   };
 
   return (
-    <form className={css.form} onSubmit={logIn}>
+    <form className={css.form} onSubmit={submit}>
       <label className={css.titleSmall} htmlFor="name">
         Name
       </label>
@@ -36,16 +47,16 @@ function Login() {
         value={name}
         onChange={handleChange}
       />
-      <label className={css.titleSmall} htmlFor="login">
-        Login
+      <label className={css.titleSmall} htmlFor="email">
+        Email
       </label>
       <input
         className={css.input}
         type="text"
-        id="login"
-        name="login"
+        id="email"
+        name="email"
         required
-        value={login}
+        value={email}
         onChange={handleChange}
       />
       <label className={css.titleSmall} htmlFor="password">

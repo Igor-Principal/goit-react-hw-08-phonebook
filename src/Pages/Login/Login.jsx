@@ -1,9 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import css from './login.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginThunk } from 'store/Auth/auth-thunk';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [info, setInfo] = useState({ login: '', password: '' });
-  const { login, password } = info;
+  const [info, setInfo] = useState({ email: '', password: '' });
+  const isAuth = useSelector(state => state.auth.token);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { email, password } = info;
+
+  useEffect(() => {
+    isAuth && navigate('/contacts');
+  }, [isAuth, navigate]);
 
   const handleChange = ({ target }) => {
     setInfo({
@@ -12,27 +24,29 @@ function Login() {
     });
   };
 
-  const logIn = e => {
+  const submit = e => {
     e.preventDefault();
 
+    dispatch(loginThunk(info));
+
     setInfo({
-      login: '',
+      email: '',
       password: '',
     });
   };
 
   return (
-    <form className={css.form} onSubmit={logIn}>
-      <label className={css.titleSmall} htmlFor="name">
+    <form className={css.form} onSubmit={submit}>
+      <label className={css.titleSmall} htmlFor="email">
         Login
       </label>
       <input
         className={css.input}
         type="text"
-        id="login"
-        name="login"
+        id="email"
+        name="email"
         required
-        value={login}
+        value={email}
         onChange={handleChange}
       />
       <label className={css.titleSmall} htmlFor="number">
