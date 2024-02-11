@@ -1,41 +1,24 @@
 import css from './header.module.css';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { logOut } from 'store/Auth/authSlice';
-import { delToken } from 'services/auth-service';
-import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import UserMenu from 'components/UserMenu/UserMenu';
 
 function Header() {
   const { profile } = useSelector(state => state.auth);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const onClick = () => {
-    dispatch(logOut());
-    delToken();
-    navigate('/');
-  };
 
   return (
     <header className={css.header}>
-      <NavLink className={css.link} to="/">
+      <NavLink className={css.link} to={profile ? '/contacts' : '/'}>
         Home
       </NavLink>
       <div>
-        {profile && (
-          <div>
-            <NavLink className={css.link} to="/contacts">
-              Contacts
-            </NavLink>
-            <p>{profile.name}</p>
-            <button onClick={onClick}>Logout</button>
-          </div>
-        )}
+        {profile && <UserMenu name={profile.name} />}
         {!profile && (
           <>
-            <NavLink className={css.link} to="/register">
+            <NavLink className={`${css.link} ${css.regPart}`} to="/register">
               Register
             </NavLink>
-            <NavLink className={css.link} to="/login">
+            <NavLink className={`${css.link} ${css.regPart}`} to="/login">
               Log In
             </NavLink>
           </>

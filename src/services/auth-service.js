@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-// {name: 'Ihor', email: 'igorprincipal@gmail.com', password: 'Zxcvbnm321'}
-
 const instance = axios.create({
   baseURL: 'https://connections-api.herokuapp.com/',
 });
