@@ -1,6 +1,6 @@
 import css from './header.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { logOut } from 'store/auth/authSlice';
+import { logOut } from 'store/Auth/authSlice';
 import { delToken } from 'services/auth-service';
 import { useDispatch, useSelector } from 'react-redux';
 

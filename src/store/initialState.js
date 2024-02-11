@@ -1,4 +1,4 @@
-import { initialStateAuth } from './auth/initialStateAuth';
+import { initialStateAuth } from './Auth/initialStateAuth';
 import { initialStateContact } from './contacts/initialStateContacts';
 import { initialStateFilter } from './filter/initilStateFilter';
 

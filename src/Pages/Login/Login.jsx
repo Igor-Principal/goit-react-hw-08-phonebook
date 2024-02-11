@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import css from './login.module.css';
 import { useDispatch } from 'react-redux';
-import { getProfileThunk, loginThunk } from 'store/auth/auth-thunk';
+import { getProfileThunk, loginThunk } from 'store/Auth/auth-thunk';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
