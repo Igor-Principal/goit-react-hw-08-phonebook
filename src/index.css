@@ -7,11 +7,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: url('https://res.cloudinary.com/dci1eujqw/image/upload/v1616769558/Codepen/waldemar-brandt-aThdSdgx0YM-unsplash_cnq4sb.jpg');
+  background: url('https://images.wallpaperscraft.ru/image/single/listia_kapli_rosa_129757_3840x2400.jpg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; */
+  background-size: cover;
 }
 
 code {
@@ -26,4 +26,31 @@ ul {
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+@media screen and (max-width: 375px) {
+  .container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .container {
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 768px) {
+  .container {
+    width: 100%;
+    max-width: 704px;
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 1250px) {
+  .container {
+    max-width: 1250px;
+  }
 }

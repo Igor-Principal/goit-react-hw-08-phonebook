@@ -36,47 +36,50 @@ function Login() {
   };
 
   return (
-    <form className={css.form} onSubmit={submit}>
-      <label className={css.titleSmall} htmlFor="name">
-        Name
-      </label>
-      <input
-        className={css.input}
-        type="text"
-        id="name"
-        name="name"
-        required
-        value={name}
-        onChange={handleChange}
-      />
-      <label className={css.titleSmall} htmlFor="email">
-        Email
-      </label>
-      <input
-        className={css.input}
-        type="text"
-        id="email"
-        name="email"
-        required
-        value={email}
-        onChange={handleChange}
-      />
-      <label className={css.titleSmall} htmlFor="password">
-        Password
-      </label>
-      <input
-        className={css.input}
-        type="password"
-        name="password"
-        id="password"
-        required
-        value={password}
-        onChange={handleChange}
-      />
-      <button className={css.button} type="submit">
-        Log in
-      </button>
-    </form>
+    <>
+      <h2 className={css.title}>Nice to meet you!</h2>
+      <form className={css.form} onSubmit={submit}>
+        <label className={css.titleSmall} htmlFor="name">
+          Name
+        </label>
+        <input
+          className={css.input}
+          type="text"
+          id="name"
+          name="name"
+          required
+          value={name}
+          onChange={handleChange}
+        />
+        <label className={css.titleSmall} htmlFor="email">
+          Email
+        </label>
+        <input
+          className={css.input}
+          type="text"
+          id="email"
+          name="email"
+          required
+          value={email}
+          onChange={handleChange}
+        />
+        <label className={css.titleSmall} htmlFor="password">
+          Password
+        </label>
+        <input
+          className={css.input}
+          type="password"
+          name="password"
+          id="password"
+          required
+          value={password}
+          onChange={handleChange}
+        />
+        <button className={css.button} type="submit">
+          Log in
+        </button>
+      </form>
+    </>
   );
 }
 

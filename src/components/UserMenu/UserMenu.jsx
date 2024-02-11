@@ -18,7 +18,7 @@ const UserMenu = ({ name }) => {
 
   return (
     <div className={css.block}>
-      <p className={css.name}>{name}</p>
+      <p className={css.text}>{name}</p>
       <button onClick={onClick} className={css.button}>
         Logout
       </button>

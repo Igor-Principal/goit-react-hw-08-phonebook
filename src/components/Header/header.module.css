@@ -4,13 +4,16 @@
   align-items: center;
   margin-bottom: 16px;
   border-bottom: 1px solid #2a363b;
+  padding-right: 15px;
+  background-color: #75696941;
 }
 
 .link {
   display: inline-block;
   text-decoration: none;
   padding: 12px;
-  color: #333;
+  color: #d3d2d2;
+
   font-size: 20px;
   letter-spacing: 2px;
   font-weight: bold;
@@ -20,8 +23,32 @@
 .regPart {
   font-size: 18px;
 }
+
 .link:hover,
 .link:focus,
 .link:active {
   transform: scale(0.95);
+}
+
+@media screen and (min-width: 375px) {
+}
+@media screen and (min-width: 768px) {
+  .header {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+
+  .regPart {
+    margin-left: 40px;
+  }
+}
+@media screen and (min-width: 1250px) {
+  .header {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+
+  .regPart {
+    margin-left: 60px;
+  }
 }

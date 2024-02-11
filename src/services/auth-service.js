@@ -1,40 +1,44 @@
 import axios from 'axios';
 
-const instance = axios.create({
+const publicInstance = axios.create({
+  baseURL: 'https://connections-api.herokuapp.com/',
+});
+
+const privateInstance = axios.create({
   baseURL: 'https://connections-api.herokuapp.com/',
 });
 
 function setToken(token) {
-  instance.defaults.headers.common['Authorization'] = token;
+  privateInstance.defaults.headers.common['Authorization'] = token;
 }
 
-export function delToken(token) {
-  delete instance.defaults.headers.common['Authorization'];
+export function delToken() {
+  delete privateInstance.defaults.headers.common['Authorization'];
 }
 
 export async function signUp(body) {
-  return await instance.post('/users/signup', body);
+  return await publicInstance.post('/users/signup', body);
 }
 
 export async function logIn(body) {
-  const { data } = await instance.post('/users/login', body);
+  const { data } = await publicInstance.post('/users/login', body);
   setToken(`Bearer ${data.token}`);
   return data;
 }
 
 export async function getProfile() {
-  const { data } = await instance('/users/current');
+  const { data } = await privateInstance('/users/current');
   return data;
 }
 
 export async function getContacts() {
-  return await instance(`/contacts`);
+  return await privateInstance(`/contacts`);
 }
 
 export async function addContact(data) {
-  return await instance.post(`/contacts`, data);
+  return await privateInstance.post(`/contacts`, data);
 }
 
 export async function deleteContact(id) {
-  return await instance.delete(`/contacts/${id}`);
+  return await privateInstance.delete(`/contacts/${id}`);
 }

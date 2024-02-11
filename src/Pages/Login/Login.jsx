@@ -39,35 +39,38 @@ function Login() {
   };
 
   return (
-    <form className={css.form} onSubmit={submit}>
-      <label className={css.titleSmall} htmlFor="email">
-        Login
-      </label>
-      <input
-        className={css.input}
-        type="text"
-        id="email"
-        name="email"
-        required
-        value={email}
-        onChange={handleChange}
-      />
-      <label className={css.titleSmall} htmlFor="number">
-        Password
-      </label>
-      <input
-        className={css.input}
-        type="password"
-        name="password"
-        id="password"
-        required
-        value={password}
-        onChange={handleChange}
-      />
-      <button className={css.button} type="submit">
-        Log in
-      </button>
-    </form>
+    <>
+      <h2 className={css.title}>You are welcome!</h2>
+      <form className={css.form} onSubmit={submit}>
+        <label className={css.titleSmall} htmlFor="email">
+          Login
+        </label>
+        <input
+          className={css.input}
+          type="text"
+          id="email"
+          name="email"
+          required
+          value={email}
+          onChange={handleChange}
+        />
+        <label className={css.titleSmall} htmlFor="number">
+          Password
+        </label>
+        <input
+          className={css.input}
+          type="password"
+          name="password"
+          id="password"
+          required
+          value={password}
+          onChange={handleChange}
+        />
+        <button className={css.button} type="submit">
+          Log in
+        </button>
+      </form>
+    </>
   );
 }
 
