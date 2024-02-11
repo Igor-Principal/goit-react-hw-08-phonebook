@@ -2,6 +2,7 @@ import { useState } from 'react';
 import css from './registration.module.css';
 import { signUp } from 'services/auth-service';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function Login() {
   const navigate = useNavigate();
@@ -19,18 +20,18 @@ function Login() {
     e.preventDefault();
 
     console.log(info);
-    
+
     signUp(info)
       .then(() => {
-        console.log('created');
+        toast.success('Created new user', { duration: 3000 });
         navigate('/login');
+        setInfo({
+          name: '',
+          email: '',
+          password: '',
+        });
       })
-      .catch(e => console.log(e));
-    setInfo({
-      name: '',
-      email: '',
-      password: '',
-    });
+      .catch(() => toast.error('Incorrect input data', { duration: 3000 }));
   };
 
   return (

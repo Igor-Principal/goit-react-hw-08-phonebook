@@ -1,21 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import css from './login.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginThunk } from 'store/Auth/auth-thunk';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function Login() {
   const [info, setInfo] = useState({ email: '', password: '' });
-  const isAuth = useSelector(state => state.auth.token);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { email, password } = info;
-
-  useEffect(() => {
-    isAuth && navigate('/contacts');
-  }, [isAuth, navigate]);
 
   const handleChange = ({ target }) => {
     setInfo({
@@ -26,8 +22,14 @@ function Login() {
 
   const submit = e => {
     e.preventDefault();
-
-    dispatch(loginThunk(info));
+    dispatch(loginThunk(info))
+      .unwrap()
+      .then(() => navigate('/contacts'))
+      .catch(() =>
+        toast.error('Incorrect email address or password', {
+          duration: 3000,
+        })
+      );
 
     setInfo({
       email: '',

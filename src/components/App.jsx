@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 // import StartPage from 'Pages/StartPage/StartPage';
 // import Registration from 'Pages/Registration/Registration';
 import { lazy } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 const Layout = lazy(() => import('./Layout/Layout'));
 const MainPart = lazy(() => import('../Pages/MainPart/MainPart'));
@@ -14,13 +15,16 @@ const Login = lazy(() => import('../Pages/Login/Login'));
 
 export const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<StartPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Registration />} />
-        <Route path="/contacts" element={<MainPart />} />
-      </Route>
-    </Routes>
+    <>
+      <Toaster position="top-right" reverseOrder={false} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<StartPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/contacts" element={<MainPart />} />
+        </Route>
+      </Routes>
+    </>
   );
 };
