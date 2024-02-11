@@ -6,9 +6,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContactsThunk } from 'store/contacts/contactThunk';
 import { contactsSelector } from 'store/contacts/contactsSelectors';
-import css from './mainPart.module.css';
+import css from './contactsPart.module.css';
 
-function MainPart() {
+function ContactsPart() {
   const { contacts, error, isLoading } = useSelector(contactsSelector);
   const dispatch = useDispatch();
 
@@ -36,4 +36,4 @@ function MainPart() {
   );
 }
 
-export default MainPart;
+export default ContactsPart;

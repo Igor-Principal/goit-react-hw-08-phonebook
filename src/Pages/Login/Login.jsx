@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import css from './login.module.css';
 import { useDispatch } from 'react-redux';
-import { loginThunk } from 'store/Auth/auth-thunk';
+import { getProfileThunk, loginThunk } from 'store/auth/auth-thunk';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -24,17 +24,19 @@ function Login() {
     e.preventDefault();
     dispatch(loginThunk(info))
       .unwrap()
-      .then(() => navigate('/contacts'))
+      .then(() => {
+        dispatch(getProfileThunk());
+        navigate('/contacts');
+        setInfo({
+          email: '',
+          password: '',
+        });
+      })
       .catch(() =>
         toast.error('Incorrect email address or password', {
           duration: 3000,
         })
       );
-
-    setInfo({
-      email: '',
-      password: '',
-    });
   };
 
   return (

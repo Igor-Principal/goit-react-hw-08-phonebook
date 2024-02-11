@@ -27,7 +27,6 @@ export async function logIn(body) {
 export async function getProfile() {
   const { data } = await instance('/users/current');
   return data;
-  // return await instance.post('/users/current', body).then(({ data }) => data);
 }
 
 export async function getContacts() {

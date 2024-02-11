@@ -1,20 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
 import css from './header.module.css';
-
 import { NavLink, useNavigate } from 'react-router-dom';
-import { logOut } from 'store/Auth/authSlice';
+import { logOut } from 'store/auth/authSlice';
 import { delToken } from 'services/auth-service';
-import { getProfileThunk } from 'store/Auth/auth-thunk';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Header() {
-  const { profile, token } = useSelector(state => state.auth);
+  const { profile } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    token && dispatch(getProfileThunk());
-  }, [token, dispatch]);
 
   const onClick = () => {
     dispatch(logOut());
