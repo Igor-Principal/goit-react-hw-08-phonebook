@@ -10,7 +10,6 @@ function StartPage() {
         We remember everything you need!
         <br />
       </h1>
-      
     </div>
   );
 }

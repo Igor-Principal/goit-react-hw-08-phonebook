@@ -1,15 +1,19 @@
+import toast from 'react-hot-toast';
 import css from './contacts.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContactsThunk } from 'store/contacts/contactThunk';
+import { contactsSelector } from 'store/contacts/contactsSelectors';
+import { filterSelector } from 'store/filter/filterSelector';
 
 const Contacts = () => {
-  const { contacts } = useSelector(state => state.contacts);
-  const { filter } = useSelector(state => state.filter);
+  const { contacts } = useSelector(contactsSelector);
+  const { filter } = useSelector(filterSelector);
 
   const dispatch = useDispatch();
 
   const handleClick = e => {
     dispatch(deleteContactsThunk(e.target.id));
+    toast.success(' Contact deleted!');
   };
 
   const filtered = contacts.filter(contact =>

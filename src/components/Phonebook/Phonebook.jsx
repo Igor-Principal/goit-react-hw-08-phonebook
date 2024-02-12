@@ -3,11 +3,13 @@ import css from './phonebook.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createContactsThunk } from 'store/contacts/contactThunk';
+import toast from 'react-hot-toast';
+import { contactsSelector } from 'store/contacts/contactsSelectors';
 
 const Phonebook = () => {
   const dispatch = useDispatch();
 
-  const { contacts } = useSelector(state => state.contacts);
+  const { contacts } = useSelector(contactsSelector);
 
   const [info, setInfo] = useState({ name: '', number: '' });
   const { name, number } = info;
@@ -25,7 +27,7 @@ const Phonebook = () => {
       contact => contact.name.toLowerCase() === name.toLowerCase().trim()
     );
     if (includeName) {
-      alert(`${name} is already in contacts`);
+     return toast.error(`${name} is already in contacts`);
     } else {
       dispatch(createContactsThunk({ name: name.trim(), number: number }));
     }
@@ -33,6 +35,7 @@ const Phonebook = () => {
       name: '',
       number: '',
     });
+    toast.success('Created a new contact');
   };
 
   return (

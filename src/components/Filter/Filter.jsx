@@ -1,9 +1,10 @@
 import css from './filter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { filterSelector } from 'store/filter/filterSelector';
 import { filterValue } from 'store/filter/filterSlice';
 
 const Filter = () => {
-  const { filter } = useSelector(state => state.filter);
+  const { filter } = useSelector(filterSelector);
   const dispatch = useDispatch();
 
  const handleFilter = ({ target }) => {

@@ -2,9 +2,10 @@ import css from './header.module.css';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UserMenu from 'components/UserMenu/UserMenu';
+import { authSelector } from 'store/Auth/authSelector';
 
 function Header() {
-  const { profile } = useSelector(state => state.auth);
+  const { profile } = useSelector(authSelector);
 
   return (
     <header>

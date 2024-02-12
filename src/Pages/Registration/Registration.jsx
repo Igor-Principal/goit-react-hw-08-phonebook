@@ -3,8 +3,10 @@ import css from './registration.module.css';
 import { signUp } from 'services/auth-service';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk } from 'store/Auth/auth-thunk';
+import Loader from 'components/Loader/Loader';
+import { authSelector } from 'store/Auth/authSelector';
 
 function Login() {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ function Login() {
 
   const [info, setInfo] = useState({ name: '', email: '', password: '' });
   const { name, email, password } = info;
+  const { isLoading } = useSelector(authSelector);
 
   const handleChange = ({ target }) => {
     setInfo({
@@ -22,21 +25,27 @@ function Login() {
 
   const submit = e => {
     e.preventDefault();
-
-    console.log(info);
-
+    if (password.length < 8)
+      return toast.error('Password shougth de longer 8 symbols ');
     signUp(info)
       .then(() => {
-        toast.success('Registration successfuly', { duration: 3000 });
         dispatch(loginThunk({ email, password }))
-          .then(() => navigate('/contacts'))
-          .catch(() => toast.error('Failed to log in', { duration: 3000 }));
+          .then(() => {
+            navigate('/contacts');
+            toast.success('Registration successfuly', { duration: 3000 });
+          })
+          .catch(() => {
+            toast.error('Failed to log in', { duration: 3000 });
+          });
       })
-      .catch(() => toast.error('Incorrect input data', { duration: 3000 }));
+      .catch(() => {
+        toast.error('Incorrect input data', { duration: 3000 });
+      });
   };
 
   return (
     <>
+      {isLoading && <Loader />}
       <h2 className={css.title}>Nice to meet you!</h2>
       <form className={css.form} onSubmit={submit}>
         <label className={css.titleSmall} htmlFor="name">

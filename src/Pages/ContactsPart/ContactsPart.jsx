@@ -15,23 +15,29 @@ function ContactsPart() {
   useEffect(() => {
     dispatch(getContactsThunk());
   }, [dispatch]);
+  
   return (
-    <div className={css.wrapper}>
-      <h1 className={css.title}>Phonebook</h1>
-      <Phonebook />
+    <div className="container">
       {isLoading && <Loader />}
-      {!isLoading && contacts && contacts.length === 0 && (
-        <h2 className={css.titleEmpty}>The contact list is empty</h2>
-      )}
-      {contacts.length > 0 && (
-        <>
-          <h2 className={css.title}>Contacts</h2>
-          <Filter />
-
-          <Contacts />
-        </>
-      )}
-      {error && <div>{error}</div>}
+      <div className={css.mainPart}>
+        <div className={css.formPart}>
+          <h1 className={css.title}>Phonebook</h1>
+          <Phonebook />
+        </div>
+        <div className={css.contactsPart}>
+          {!isLoading && contacts && contacts.length === 0 && (
+            <h2 className={css.titleEmpty}>The contact list is empty...</h2>
+          )}
+          {contacts.length > 0 && (
+            <>
+              <h2 className={css.title}>Contacts</h2>
+              <Filter />
+              <Contacts />
+            </>
+          )}
+        </div>
+        {error && <div>{error}</div>}
+      </div>
     </div>
   );
 }
