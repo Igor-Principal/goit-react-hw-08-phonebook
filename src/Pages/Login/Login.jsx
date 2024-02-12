@@ -51,7 +51,7 @@ function Login() {
       <h2 className={css.title}>You are welcome!</h2>
       <form className={css.form} onSubmit={submit}>
         <label className={css.titleSmall} htmlFor="email">
-          Login
+          Email
         </label>
         <input
           className={css.input}
