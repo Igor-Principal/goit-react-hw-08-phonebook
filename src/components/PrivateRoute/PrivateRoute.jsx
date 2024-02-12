@@ -6,11 +6,7 @@ const PrivateRoute = ({ children }) => {
   // const { isLoading } = useSelector(state => state.auth);
   const location = useLocation();
 
-  return auth  ? (
-    children
-  ) : (
-    <Navigate to={'/login'} state={location} />
-  );
+  return auth ? children : <Navigate to={'/login'} state={location} />;
 };
 
 export default PrivateRoute;
