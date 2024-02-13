@@ -8,7 +8,7 @@ const privateInstance = axios.create({
   baseURL: 'https://connections-api.herokuapp.com/',
 });
 
-function setToken(token) {
+export function setToken(token) {
   privateInstance.defaults.headers.common['Authorization'] = token;
 }
 

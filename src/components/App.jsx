@@ -14,8 +14,25 @@ import StartPage from 'Pages/StartPage/StartPage';
 import Registration from '../Pages/Registration/Registration';
 import Login from 'Pages/Login/Login';
 import ErrorPage from 'Pages/ErrorPage/ErrorPage';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { authSelector } from 'store/Auth/authSelector';
+import { getProfileThunk } from 'store/Auth/auth-thunk';
+import { setToken } from 'services/auth-service';
 
 export const App = () => {
+  const dispatch = useDispatch();
+  const { token } = useSelector(authSelector);
+
+  useEffect(() => {
+    if (token) {
+       setToken(`Bearer ${token}`);
+      dispatch(getProfileThunk());
+    } else {
+      return;
+    }
+  }, [token, dispatch]);
+
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
