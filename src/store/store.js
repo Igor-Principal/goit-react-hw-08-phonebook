@@ -12,7 +12,7 @@ import { reducer } from './reducer';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['filter', 'contacts'],
+  whitelist: ['auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
