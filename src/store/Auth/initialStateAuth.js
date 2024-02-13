@@ -3,4 +3,5 @@ export const initialStateAuth = {
   isLoading: false,
   error: false,
   profile: null,
+  isLoad: false,
 };

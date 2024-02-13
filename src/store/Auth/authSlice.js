@@ -16,6 +16,7 @@ const handleFulfilledProfile = (state, { payload }) => {
   state.isLoading = false;
   state.error = '';
   state.profile = payload;
+  state.isLoad = true;
 };
 
 const handleRejected = (state, { payload }) => {
@@ -30,6 +31,7 @@ const authSlise = createSlice({
     logOut(state) {
       state.token = '';
       state.profile = null;
+      state.isLoad = false;
     },
   },
   extraReducers: builder => {

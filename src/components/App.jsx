@@ -17,16 +17,16 @@ import ErrorPage from 'Pages/ErrorPage/ErrorPage';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { token } = useSelector(authSelector);
+  const { token, isLoad } = useSelector(authSelector);
 
   useEffect(() => {
-    if (token) {
-      setToken(`Bearer ${token}`);
+    if (isLoad) {
+      setToken(token);
       dispatch(getProfileThunk());
     } else {
       return;
     }
-  }, [token, dispatch]);
+  }, [token, isLoad, dispatch]);
 
   return (
     <>
