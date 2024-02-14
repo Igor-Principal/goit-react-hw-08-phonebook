@@ -14,10 +14,11 @@ import StartPage from 'Pages/StartPage/StartPage';
 import Registration from '../Pages/Registration/Registration';
 import Login from 'Pages/Login/Login';
 import ErrorPage from 'Pages/ErrorPage/ErrorPage';
+import Loader from './Loader/Loader';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { token, isLoad } = useSelector(authSelector);
+  const { token, isLoad, isLoading } = useSelector(authSelector);
 
   useEffect(() => {
     if (isLoad) {
@@ -30,38 +31,43 @@ export const App = () => {
 
   return (
     <>
-      <Toaster position="top-right" reverseOrder={false} />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<StartPage />} />
-
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <Registration />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <PrivateRoute>
-                <ContactsPart />
-              </PrivateRoute>
-            }
-          />
-          <Route path="*" element={<ErrorPage />} />
-        </Route>
-      </Routes>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <Toaster position="top-right" reverseOrder={false} />
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<StartPage />} />
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute>
+                    <Login />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <PublicRoute>
+                    <Registration />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/contacts"
+                element={
+                  <PrivateRoute>
+                    <ContactsPart />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="*" element={<ErrorPage />} />
+            </Route>
+          </Routes>
+        </>
+      )}
     </>
   );
 };
