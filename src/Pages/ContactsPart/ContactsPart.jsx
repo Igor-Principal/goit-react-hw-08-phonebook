@@ -7,15 +7,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getContactsThunk } from 'store/contacts/contactThunk';
 import { contactsSelector } from 'store/contacts/contactsSelectors';
 import css from './contactsPart.module.css';
+import { setToken } from 'services/auth-service';
+import { authSelector } from 'store/Auth/authSelector';
 
 function ContactsPart() {
   const { contacts, error, isLoading } = useSelector(contactsSelector);
+  const { token } = useSelector(authSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setToken(token);
     dispatch(getContactsThunk());
-  }, [dispatch]);
-  
+  }, [token, dispatch]);
+
   return (
     <div className="container">
       {isLoading && <Loader />}
