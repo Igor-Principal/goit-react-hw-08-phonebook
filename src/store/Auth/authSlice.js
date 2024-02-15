@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getProfileThunk, loginThunk } from './auth-thunk';
+import { getProfileThunk, loginOutThunk, loginThunk } from './auth-thunk';
 import { initialStateAuth } from './initialStateAuth';
 
 const handlePending = state => {
@@ -18,6 +18,12 @@ const handleFulfilledProfile = (state, { payload }) => {
   state.profile = payload;
   state.isLoad = true;
 };
+const handleFulfilledLogOut = state => {
+  state.token = '';
+  state.profile = null;
+  state.isLoad = false;
+  state.isLoading = false;
+};
 
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
@@ -27,23 +33,25 @@ const handleRejected = (state, { payload }) => {
 const authSlise = createSlice({
   name: 'auth',
   initialState: initialStateAuth,
-  reducers: {
-    logOut(state) {
-      state.token = '';
-      state.profile = null;
-      state.isLoad = false;
-    },
-  },
   extraReducers: builder => {
     builder
       .addCase(loginThunk.fulfilled, handleFulfilledLogin)
       .addCase(getProfileThunk.fulfilled, handleFulfilledProfile)
+      .addCase(loginOutThunk.fulfilled, handleFulfilledLogOut)
       .addMatcher(
-        isAnyOf(loginThunk.pending, getProfileThunk.pending),
+        isAnyOf(
+          loginThunk.pending,
+          getProfileThunk.pending,
+          loginOutThunk.pending
+        ),
         handlePending
       )
       .addMatcher(
-        isAnyOf(loginThunk.rejected, getProfileThunk.rejected),
+        isAnyOf(
+          loginThunk.rejected,
+          getProfileThunk.rejected,
+          loginOutThunk.rejected
+        ),
         handleRejected
       );
   },

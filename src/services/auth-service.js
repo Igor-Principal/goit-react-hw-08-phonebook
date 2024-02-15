@@ -25,6 +25,10 @@ export async function logIn(body) {
   setToken(`Bearer ${data.token}`);
   return data;
 }
+export async function logOut() {
+  const { data } = await privateInstance.post('/users/logout');
+  return data;
+}
 
 export async function getProfile() {
   const { data } = await privateInstance('/users/current');

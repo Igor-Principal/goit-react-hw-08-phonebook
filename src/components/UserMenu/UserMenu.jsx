@@ -3,16 +3,14 @@ import css from './userMenu.module.css';
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { logOut } from 'store/Auth/authSlice';
-import { delToken } from 'services/auth-service';
+import { loginOutThunk } from 'store/Auth/auth-thunk';
 
 const UserMenu = ({ name }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onClick = () => {
-    dispatch(logOut());
-    delToken();
+    dispatch(loginOutThunk());
     navigate('/');
   };
 
