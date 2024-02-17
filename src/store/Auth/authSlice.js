@@ -25,6 +25,12 @@ const handleFulfilledLogOut = state => {
   state.isLoading = false;
 };
 
+const handleGetProfileThunkRejected = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = payload;
+  state.isLoad = true;
+};
+
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
@@ -38,6 +44,7 @@ const authSlise = createSlice({
       .addCase(loginThunk.fulfilled, handleFulfilledLogin)
       .addCase(getProfileThunk.fulfilled, handleFulfilledProfile)
       .addCase(loginOutThunk.fulfilled, handleFulfilledLogOut)
+      .addCase(getProfileThunk.rejected, handleGetProfileThunkRejected)
       .addMatcher(
         isAnyOf(
           loginThunk.pending,
@@ -47,11 +54,7 @@ const authSlise = createSlice({
         handlePending
       )
       .addMatcher(
-        isAnyOf(
-          loginThunk.rejected,
-          getProfileThunk.rejected,
-          loginOutThunk.rejected
-        ),
+        isAnyOf(loginThunk.rejected, loginOutThunk.rejected),
         handleRejected
       );
   },
