@@ -8,7 +8,7 @@ import { loginThunk } from 'store/Auth/auth-thunk';
 import Loader from 'components/Loader/Loader';
 import { authSelector } from 'store/Auth/authSelector';
 
-function Login() {
+function Registration() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -92,4 +92,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Registration;

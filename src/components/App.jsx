@@ -21,48 +21,44 @@ export const App = () => {
   useEffect(() => {
     if (isLoad) {
       dispatch(getProfileThunk());
-      console.log(isLoad);
     } else {
       return;
     }
   }, [isLoad, dispatch]);
 
-
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
-      {isLoad && (
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<StartPage />} />
-            <Route
-              path="/login"
-              element={
-                <PublicRoute>
-                  <Login />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <PublicRoute>
-                  <Registration />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/contacts"
-              element={
-                <PrivateRoute>
-                  <ContactsPart />
-                </PrivateRoute>
-              }
-            />
-            <Route path="*" element={<ErrorPage />} />
-          </Route>
-        </Routes>
-      )}
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<StartPage />} />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <Registration />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute>
+                <ContactsPart />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+      </Routes>
     </>
   );
 };
