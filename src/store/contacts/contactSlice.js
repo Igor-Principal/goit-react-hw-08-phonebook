@@ -5,7 +5,7 @@ import {
   deleteContactsThunk,
   getContactsThunk,
 } from './contactThunk';
-import { initialStateContact } from './initialStateContacts';
+import { initialStore } from 'store/initialState';
 
 const STATUS = {
   PENDING: 'pending',
@@ -46,7 +46,7 @@ const handleRejected = (state, { payload }) => {
 
 export const contactSlice = createSlice({
   name: 'contacts',
-  initialState: initialStateContact,
+  initialState: initialStore.contacts,
   extraReducers: builder => {
     const { PENDING, FULFILLED, REJECTED } = STATUS;
     builder

@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { getProfileThunk, loginOutThunk, loginThunk } from './auth-thunk';
-import { initialStateAuth } from './initialStateAuth';
+import { initialStore } from 'store/initialState';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -32,7 +32,7 @@ const handleRejected = (state, { payload }) => {
 
 const authSlise = createSlice({
   name: 'auth',
-  initialState: initialStateAuth,
+  initialState: initialStore.auth,
   extraReducers: builder => {
     builder
       .addCase(loginThunk.fulfilled, handleFulfilledLogin)
